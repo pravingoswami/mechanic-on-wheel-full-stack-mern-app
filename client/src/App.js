@@ -18,6 +18,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { connect } from 'react-redux';
 import { BrowserRouter, Route, Link } from "react-router-dom"
 import HomePage from './components/home/Home';
+import RegisterPage from './components/customer/register/Register';
+import LoginPage from './components/customer/login/Login';
+import { startLogoutUser } from './actions/usersActions';
 
 
 class App extends React.Component{
@@ -41,10 +44,12 @@ class App extends React.Component{
     color : "inherit"
   }
 
+  handleLogout = () => {
+    console.log('hi')
+    this.props.dispatch(startLogoutUser())
+  }
+
   render(){
-
-
-
     return(
       <div>
         <BrowserRouter>
@@ -88,12 +93,13 @@ class App extends React.Component{
           }
 
           </Nav>
-          <NavbarText>Simple Text</NavbarText>
         </Collapse>
       </Navbar>
 
 
       <Route path = "/home" component = {HomePage} />
+      <Route path = "/register" component = {RegisterPage} />
+      <Route path = "/login" component = {LoginPage} />
 
     </BrowserRouter>
       </div>
