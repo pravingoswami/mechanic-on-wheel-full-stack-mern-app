@@ -1,4 +1,4 @@
-const authorizeUser = (req, res, next) => {
+const authorizeAdmin = (req, res, next) => {
     if(req.user.role === 'admin'){
         next()
     } else {
@@ -6,4 +6,4 @@ const authorizeUser = (req, res, next) => {
     }
 }
 
-module.exports = {authorizeUser}
+module.exports = {authorizeAdmin}

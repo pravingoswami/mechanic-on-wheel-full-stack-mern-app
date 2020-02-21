@@ -30,6 +30,20 @@ const userSchema = new Schema({
         }
     },
 
+    mobile : {
+        type : String,
+        minlength : 10,
+        maxlength : 10,
+        validate : {
+            validator : function(value){
+                return validator.isNumeric(value)
+            },
+            message : function(){
+                return 'Invalid mobile number'
+            }
+        }
+    },
+
     password : {
         type : String,
         required : true
@@ -72,6 +86,20 @@ const userSchema = new Schema({
     avatar : {
         type : String
     },
+
+    lisenceNumber : {
+        type : String    },
+
+    lisenceImage : {
+        type : String
+    },
+
+    vehical : [
+        {
+            type : mongoose.Schema.Types.ObjectId,
+            ref : 'Vehical'
+        }
+    ],
 
     createdAt : {
         type : Date,

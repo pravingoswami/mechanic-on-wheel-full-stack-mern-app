@@ -51,3 +51,10 @@ module.exports.removeUser = (req, res) => {
         .then(user => user ? res.json(user) : res.json({}))
         .catch(err => res.json(err))
 }
+
+module.exports.edit = (req, res) => {
+    const body = req.body
+    User.findByIdAndUpdate(req.user._id, body, {new : true, runValidators : true})
+        .then(user => user ? res.json(user) : res.json({}))
+        .catch(err => res.json(err))
+}
