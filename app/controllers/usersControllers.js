@@ -13,7 +13,7 @@ module.exports.register = (req, res) => {
     const user = new User(body)
     user.ips.register.push(req.ip)
     user.save()
-        .then(user => res.json(user))
+        .then(user => res.json(pick(user, ["_id", "username", "email", "mobile"])))
         .catch(err => res.json(err))
 }
 
@@ -31,12 +31,12 @@ module.exports.login = (req, res) => {
 }
 
 module.exports.info = (req, res) => {
-    res.json(req.user)
+    res.json(pick(req.user, ["_id", "username", "email", "mobile"]))
 }
 
 module.exports.logout = (req, res) => {
     User.findByIdAndUpdate(req.user._id, {$pull : {tokens : { token : req.token}}})
-        .then(user => user ? res.json(user) : res.json({}))
+        .then(user => user ? res.json(pick(user, ["_id", "username", "email", "mobile"])) : res.json({}))
         .catch(err => res.json(err))
 }
 
