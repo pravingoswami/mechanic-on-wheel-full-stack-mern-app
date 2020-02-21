@@ -1,4 +1,5 @@
 import axios from '../config/axios'
+import Swal from 'sweetalert2'
 
 export const setUser = (user) => {
     return {
@@ -12,11 +13,20 @@ export const startLoginUser = (formData, redirect) => {
         axios.post('/customers/login', formData)
             .then(response => {
                 if(response.data.errors){
-                    alert(response.data.errors)
+                    Swal.fire(
+                        'Alert!',
+                        response.data.errors,
+                        'error'
+                      )                  
                 } else {
                     console.log(response.data)
                     localStorage.setItem('x-auth', response.data.token)
                     dispatch(setUser(response.data.user))
+                    Swal.fire(
+                        'logged in!!',
+                        'You Successfully logged in.',
+                        'success'
+                      )  
                     redirect()
                 }
             })
@@ -36,10 +46,19 @@ export const startLogoutUser = () => {
         })
             .then(response => {
                 if(response.data.message){
-                    alert(response.data.message)
+                    Swal.fire(
+                        'Alert!',
+                        response.data.message,
+                        'error'
+                      )
                 } else {
                     localStorage.removeItem('x-auth')
                     dispatch(removeUser())
+                    Swal.fire(
+                        'logged out!!',
+                        'You Successfully logged out.',
+                        'success'
+                      )  
                 }
             })
     }
