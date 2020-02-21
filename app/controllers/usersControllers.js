@@ -39,3 +39,15 @@ module.exports.logout = (req, res) => {
         .then(user => user ? res.json(user) : res.json({}))
         .catch(err => res.json(err))
 }
+
+module.exports.userInfo = (req, res) => {
+    User.findById(req.params.id)
+        .then(user => res.json(user))
+        .catch(err => res.json(err))
+}
+
+module.exports.removeUser = (req, res) => {
+    User.findByIdAndDelete(req.params.id)
+        .then(user => user ? res.json(user) : res.json({}))
+        .catch(err => res.json(err))
+}

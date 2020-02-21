@@ -11,6 +11,8 @@ router.post('/users/login', usersControllers.login)
 router.get('/users/account', authenticateUser, usersControllers.info)
 router.get('/users/logout', authenticateUser, usersControllers.logout)
 router.get('/admin/users', usersControllers.listUsers)
+router.get('/admin/users/:id', usersControllers.userInfo)
+router.delete('/admin/users/:id', usersControllers.removeUser)
 
 
 
