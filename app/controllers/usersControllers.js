@@ -20,7 +20,7 @@ module.exports.register = (req, res) => {
 module.exports.login = (req, res) => {
     const body = req.body
     let user
-    console.log(body.email, body.password)
+    console.log(body.email || body.username, body.password)
     User.findByCredentials(body.email, body.password)
         .then(userData => {
             user = pick(userData, ['_id', "username", "email"])

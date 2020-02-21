@@ -96,9 +96,11 @@ userSchema.pre('save', function(next){
     }
 })
 
-userSchema.statics.findByCredentials = function(email, password){
+userSchema.statics.findByCredentials = function(data, password){
     const User = this
-    return User.findOne({email})
+    let find
+    (validator.isEmail(data)) ? find = {email : data} : find = {username : data}
+    return User.findOne(find)
                 .then(User => {
                     if(!User){
                         return Promise.reject({errors : 'Invalid email or password'})
