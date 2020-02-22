@@ -15,7 +15,7 @@ const headerStyle = {
     // margin : "50px 0 50px 0"
 }
 const imageStyle = {
-backgroundImage: `url("https://cdn.pixabay.com/photo/2014/01/07/20/34/laptop-240192_960_720.jpg")`,
+    backgroundImage: `url("https://wallpaperaccess.com/full/1726177.jpg")`,
 backgroundRepeat: 'no-repeat',
 backgroundSize: 'cover',
 backgroundPosition: 'center center',

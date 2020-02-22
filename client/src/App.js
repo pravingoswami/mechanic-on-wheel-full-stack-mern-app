@@ -21,6 +21,8 @@ import HomePage from './components/home/Home';
 import RegisterPage from './components/customer/register/Register';
 import LoginPage from './components/customer/login/Login';
 import { startLogoutUser } from './actions/usersActions';
+import VahicalList from './components/customer/vehical/VahicalList';
+import NewVehical from './components/customer/vehical/NewVehical';
 
 
 class App extends React.Component{
@@ -66,11 +68,15 @@ class App extends React.Component{
             Object.keys(this.props.user).length > 0 ? (
               <React.Fragment>
               <NavItem>
-              <NavLink ><Link to ="/notes" style = {this.linkStyle} >NOTES</Link></NavLink>
+              <NavLink ><Link to ="/profile" style = {this.linkStyle} >PROFILE</Link></NavLink>
             </NavItem>
   
             <NavItem>
-              <NavLink ><Link to ="/categories" style = {this.linkStyle} >CATEGORIES</Link></NavLink>
+              <NavLink ><Link to ="/vehicals" style = {this.linkStyle} >VEHICALS</Link></NavLink>
+            </NavItem>
+
+            <NavItem>
+              <NavLink ><Link to ="/issue-history" style = {this.linkStyle} >ISSUE HISTORY</Link></NavLink>
             </NavItem>
   
             <NavItem>
@@ -100,6 +106,11 @@ class App extends React.Component{
       <Route path = "/home" component = {HomePage} />
       <Route path = "/register" component = {RegisterPage} />
       <Route path = "/login" component = {LoginPage} />
+
+      <Route path = "/vehicals" component = {VahicalList} exact = {true} />
+      <Route path = "/vehicals/add-vehicals" component = {NewVehical} exact = {true}/>
+      <Route path = "/vehicals/show/:vehical" component = {NewVehical} exact = {true}/>
+    
 
     </BrowserRouter>
       </div>

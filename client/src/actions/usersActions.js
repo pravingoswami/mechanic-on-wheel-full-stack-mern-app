@@ -63,3 +63,31 @@ export const startLogoutUser = () => {
             })
     }
 }
+
+export const startRegisterUser = (formData, redirect) => {
+    return (dispatch) => {
+        axios.post('/customers/register', formData)
+            .then(response => {
+                if(response.data.errmsg){
+                    Swal.fire(
+                        'Alert!',
+                        response.data.errmsg,
+                        'error'
+                      )
+                } else if(response.data.errors){
+                    Swal.fire(
+                        'Alert!',
+                        response.data.message,
+                        'error'
+                      )
+                } else {
+                    Swal.fire(
+                        'Registered!!',
+                        'You Successfully registered.',
+                        'success'
+                      ) 
+                    redirect()
+                }
+            })
+    }
+}

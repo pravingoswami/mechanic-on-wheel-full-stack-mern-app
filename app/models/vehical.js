@@ -13,6 +13,15 @@ const vehicalSchema = new Schema({
         type : String
     },
 
+    vehicalType : {
+        type : String,
+        enum : ['2 Wheeler', '4 Wheeler', '3 Wheeler']
+    },
+
+    user : {
+        type : mongoose.Schema.Types.ObjectId
+    },
+
     createdAt : {
         type : Date,
         default : Date.now()

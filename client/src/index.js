@@ -5,6 +5,7 @@ import {Provider} from 'react-redux'
 import configureStore from './store/configureStore'
 import { setUser } from './actions/usersActions';
 import axios from './config/axios';
+import { startGetVehicals } from './actions/vehicalsAction';
 
 const store = configureStore()
 
@@ -22,7 +23,7 @@ if(localStorage.getItem('x-auth')){
     .then(response=>{
             const user = response.data
             store.dispatch(setUser(user))
-             
+            store.dispatch(startGetVehicals())
     })             
 }
 
