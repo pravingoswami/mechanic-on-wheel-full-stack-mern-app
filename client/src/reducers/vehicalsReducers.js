@@ -11,6 +11,10 @@ const vehicalsReducers = (state = vehicalsInitialState, action) => {
             return [...state, action.payload]
         }
 
+        case 'REMOVE_VEHICAL' : {
+            return state.filter(vehical => vehical._id !== action.payload)
+        }
+
         default : {
             return [...state]
         }

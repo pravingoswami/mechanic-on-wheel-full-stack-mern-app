@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const validator = require('validator')
 
 const Schema = mongoose.Schema
 
@@ -47,22 +46,26 @@ const suppoerterSchema = new Schema({
     }
 })
 
-const servicerProvingAsRemote = new Schema({
+const serviceProvider = new Schema({
 
     user : {
         type : mongoose.Schema.Types.ObjectId,
         ref : 'User'
     },
 
-    category : {
-        type : mongoose.Schema.type.ObjectId,
-        ref : 'ServiceProviderCategory'
+    role : {
+        type : String,
+        enum : ['Service Provider as Remotely', 'Service Provider as Shop Owner']
     },
 
     vehicalType : {
         type : String,
         enum : ['Bike', 'Tow truck'],
         required : true
+    },
+
+    shopName : {
+        type : String
     },
 
     suppoerter : [suppoerterSchema],
@@ -76,8 +79,9 @@ const servicerProvingAsRemote = new Schema({
         type : Date,
         default : Date.now()
     }
+
 })
 
-const ServicerProvingAsRemote = mongoose.model('ServicerProvingAsRemote', servicerProvingAsRemote)
+const ServiceProvider = mongoose.model('Service Provider', serviceProvider)
 
-module.exports = ServicerProvingAsRemote
+module.exports = ServiceProvider

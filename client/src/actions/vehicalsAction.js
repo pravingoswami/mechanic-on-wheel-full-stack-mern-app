@@ -55,3 +55,22 @@ export const startAddVehical = (formData, redirect) => {
             })
     }
 }
+
+export const removeVehical = (id) => {
+    return {
+        type : 'REMOVE_VEHICAL',
+        payload : id
+    }
+}
+
+export const StartRemoveVehical = (id) => {
+    return (dispatch) => {
+        axios.delete(`/customers/vehicals/${id}`, {
+            headers : {'x-auth' : localStorage.getItem('x-auth')}
+        })
+            .then(response => {
+                dispatch(removeVehical(response.data._id))
+            })
+            
+    } 
+}

@@ -23,6 +23,7 @@ import LoginPage from './components/customer/login/Login';
 import { startLogoutUser } from './actions/usersActions';
 import VahicalList from './components/customer/vehical/VahicalList';
 import NewVehical from './components/customer/vehical/NewVehical';
+import ShowVehical from './components/customer/vehical/ShowVehical';
 
 
 class App extends React.Component{
@@ -109,7 +110,7 @@ class App extends React.Component{
 
       <Route path = "/vehicals" component = {VahicalList} exact = {true} />
       <Route path = "/vehicals/add-vehicals" component = {NewVehical} exact = {true}/>
-      <Route path = "/vehicals/show/:vehical" component = {NewVehical} exact = {true}/>
+      <Route path = "/vehicals/show/:vehical" component = {ShowVehical} exact = {true}/>
     
 
     </BrowserRouter>

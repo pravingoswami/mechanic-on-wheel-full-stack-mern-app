@@ -15,8 +15,7 @@ module.exports.create = (req, res) => {
 }
 
 module.exports.show = (req, res) => {
-    const id = req.params.id
-    Vehical.findOne({_id : id, user : req.user._id})
+    Vehical.findOne({_id : req.params.id, user : req.user._id})
         .then(vehical => vehical ? res.json(vehical) : res.json({}))
         .catch(err => res.json(err))
 }
