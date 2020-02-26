@@ -15,7 +15,7 @@ const vehicalSchema = new Schema({
 
     vehicalType : {
         type : String,
-        enum : ['2 Wheeler', '4 Wheeler', '3 Wheeler']
+        enum : ['Bike', 'Car', 'Toe Truck', 'Auto']
     },
 
     user : {

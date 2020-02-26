@@ -10,7 +10,7 @@ export const setUser = (user) => {
 
 export const startLoginUser = (formData, redirect) => {
     return (dispatch) => {
-        axios.post('/customers/login', formData)
+        axios.post('/users/login', formData)
             .then(response => {
                 if(response.data.errors){
                     Swal.fire(
@@ -41,7 +41,7 @@ export const removeUser = () => {
 
 export const startLogoutUser = () => {
     return (dispatch) => {
-        axios.delete('customers/logout', {
+        axios.delete('/users/logout', {
             headers : {'x-auth' : localStorage.getItem('x-auth')}
         })
             .then(response => {
@@ -66,7 +66,7 @@ export const startLogoutUser = () => {
 
 export const startRegisterUser = (formData, redirect) => {
     return (dispatch) => {
-        axios.post('/customers/register', formData)
+        axios.post('/users/register', formData)
             .then(response => {
                 if(response.data.errmsg){
                     Swal.fire(

@@ -2,49 +2,49 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 
-const suppoerterSchema = new Schema({
-    name : {
-        type : String,
-        required : true
-    },
+// const suppoerterSchema = new Schema({
+//     name : {
+//         type : String,
+//         required : true
+//     },
 
-    email : {
-        type : String,
-        required : true,
-        unique : true,
-        validate : {
-            validator : function(value){
-                return validator.isEmail(value)
-            },
-            message : function(){
-                return 'Invalid Email'
-            }
-        }
-    },
+//     email : {
+//         type : String,
+//         required : true,
+//         unique : true,
+//         validate : {
+//             validator : function(value){
+//                 return validator.isEmail(value)
+//             },
+//             message : function(){
+//                 return 'Invalid Email'
+//             }
+//         }
+//     },
 
-    mobile : {
-        type : String,
-        minlength : 10,
-        maxlength : 10,
-        validate : {
-            validator : function(value){
-                return validator.isNumeric(value)
-            },
-            message : function(){
-                return  'Invalid Mobile Number'
-            }
-        }
-    },
+//     mobile : {
+//         type : String,
+//         minlength : 10,
+//         maxlength : 10,
+//         validate : {
+//             validator : function(value){
+//                 return validator.isNumeric(value)
+//             },
+//             message : function(){
+//                 return  'Invalid Mobile Number'
+//             }
+//         }
+//     },
 
-    avatar : {
-        type : String
-    },
+//     avatar : {
+//         type : String
+//     },
 
-    createdAt : {
-        type : Date,
-        default : Date.now()
-    }
-})
+//     createdAt : {
+//         type : Date,
+//         default : Date.now()
+//     }
+// })
 
 const serviceProvider = new Schema({
 
@@ -53,22 +53,23 @@ const serviceProvider = new Schema({
         ref : 'User'
     },
 
-    role : {
+    serviceType : {
         type : String,
         enum : ['Service Provider as Remotely', 'Service Provider as Shop Owner']
     },
 
-    vehicalType : {
-        type : String,
-        enum : ['Bike', 'Tow truck'],
-        required : true
-    },
+    // vehical : [
+    //     {
+    //         type : mongoose.Schema.Types.ObjectId,
+    //         ref : 'Vehical'
+    //     }
+    // ],
 
     shopName : {
         type : String
     },
 
-    suppoerter : [suppoerterSchema],
+    // suppoerter : [suppoerterSchema],
 
     location : {
         type: { type: String },

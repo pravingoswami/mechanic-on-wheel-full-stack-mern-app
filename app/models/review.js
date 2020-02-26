@@ -3,12 +3,26 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const reviewSchema = new Schema({
-    user : {
+    reviewBy : {
         type : mongoose.Schema.Types.ObjectId,
         ref : 'User'
     },
 
-    reviewText : {
+    reviewTo : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'User'
+    },
+
+    review : {
+        type : Number,
+        required : true
+    },
+
+    title : {
+        type : String
+    },
+
+    body : {
         type : String
     },
 
@@ -17,3 +31,7 @@ const reviewSchema = new Schema({
         default : Date.now()
     }
 })
+
+const ReviewSchema = mongoose.model('ReviewSchema', reviewSchema)
+
+module.exports = ReviewSchema

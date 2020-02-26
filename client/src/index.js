@@ -15,7 +15,7 @@ store.subscribe(() => {
 
 
 if(localStorage.getItem('x-auth')){
-    axios.get('/customers/account',{
+    axios.get('/users/account',{
          headers: {
                  'x-auth': localStorage.getItem('x-auth')
          }

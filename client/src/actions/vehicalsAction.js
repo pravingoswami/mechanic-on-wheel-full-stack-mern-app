@@ -11,7 +11,7 @@ export const setVehicals = (vehicals) => {
 
 export const startGetVehicals = () => {
     return (dispatch) => {
-        axios.get('/customers/vehicals', {
+        axios.get('/users/vehicals', {
                 headers : {'x-auth' : localStorage.getItem('x-auth')}
         })
         .then(response => {
@@ -38,7 +38,7 @@ export const addVehical = (vehical) => {
 
 export const startAddVehical = (formData, redirect) => {
     return (dispatch) => {
-        axios.post('/customers/vehicals', formData, {
+        axios.post('/users/vehicals', formData, {
             headers : {'x-auth' : localStorage.getItem('x-auth')}
         })
             .then(response => {
@@ -65,7 +65,7 @@ export const removeVehical = (id) => {
 
 export const StartRemoveVehical = (id) => {
     return (dispatch) => {
-        axios.delete(`/customers/vehicals/${id}`, {
+        axios.delete(`/users/vehicals/${id}`, {
             headers : {'x-auth' : localStorage.getItem('x-auth')}
         })
             .then(response => {

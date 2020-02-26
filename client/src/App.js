@@ -57,7 +57,7 @@ class App extends React.Component{
       <div>
         <BrowserRouter>
       <Navbar color="dark" dark expand="md">
-        <NavbarBrand href="/">Mechanic On Wheel</NavbarBrand>
+        <NavbarBrand href="/"><strong>Mechanic On Wheel</strong></NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="mr-auto" navbar>
@@ -67,25 +67,118 @@ class App extends React.Component{
 
           {
             Object.keys(this.props.user).length > 0 ? (
-              <React.Fragment>
-              <NavItem>
-              <NavLink ><Link to ="/profile" style = {this.linkStyle} >PROFILE</Link></NavLink>
-            </NavItem>
-  
-            <NavItem>
-              <NavLink ><Link to ="/vehicals" style = {this.linkStyle} >VEHICALS</Link></NavLink>
-            </NavItem>
 
-            <NavItem>
-              <NavLink ><Link to ="/issue-history" style = {this.linkStyle} >ISSUE HISTORY</Link></NavLink>
-            </NavItem>
+                <React.Fragment>
+
+              
+              {
+                this.props.user.role == 'customer' && (
+                  <React.Fragment>
+                  <NavItem>
+                  <NavLink ><Link to ="/profile" style = {this.linkStyle} >PROFILE</Link></NavLink>
+                </NavItem>
+      
+                <NavItem>
+                  <NavLink ><Link to ="/vehicals" style = {this.linkStyle} >VEHICALS</Link></NavLink>
+                </NavItem>
+    
+                <NavItem>
+                  <NavLink ><Link to ="/issue-history" style = {this.linkStyle} >ISSUE HISTORY</Link></NavLink>
+                </NavItem>
+      
+                <NavItem>
+                  <NavLink ><Link to ="/home" style = {this.linkStyle} onClick = {this.handleLogout } >LOGOUT</Link></NavLink>
+                </NavItem>
+      
+                
+                </React.Fragment>
+              
+              )
+                }
+
+{
   
-            <NavItem>
-              <NavLink ><Link to ="/home" style = {this.linkStyle} onClick = {this.handleLogout } >LOGOUT</Link></NavLink>
-            </NavItem>
+  this.props.user.serviceType == 'Service Provider as Remotely' && (
+    <React.Fragment>
+    <NavItem>
+    <NavLink ><Link to ="/profile" style = {this.linkStyle} >PROFILE</Link></NavLink>
+  </NavItem>
+
+  <NavItem>
+    <NavLink ><Link to ="/vehicals" style = {this.linkStyle} >VEHICALS</Link></NavLink>
+  </NavItem>
+
+  <NavItem>
+    <NavLink ><Link to ="/issue-history" style = {this.linkStyle} >SOLUTION HISTORY</Link></NavLink>
+  </NavItem>
+
+  <NavItem>
+    <NavLink ><Link to ="/home" style = {this.linkStyle} onClick = {this.handleLogout } >LOGOUT</Link></NavLink>
+  </NavItem>
+
+
   
-            
-            </React.Fragment>
+  </React.Fragment>
+  )
+}
+
+{
+  
+  this.props.user.serviceType == 'Service Provider as Shop Owner' && (
+    <React.Fragment>
+    <NavItem>
+    <NavLink ><Link to ="/profile" style = {this.linkStyle} >PROFILE</Link></NavLink>
+  </NavItem>
+
+  <NavItem>
+    <NavLink ><Link to ="/vehicals" style = {this.linkStyle} >SHOPS</Link></NavLink>
+  </NavItem>
+
+  <NavItem>
+    <NavLink ><Link to ="/issue-history" style = {this.linkStyle} >SOLUTION HISTORY</Link></NavLink>
+  </NavItem>
+
+  <NavItem>
+    <NavLink ><Link to ="/home" style = {this.linkStyle} onClick = {this.handleLogout } >LOGOUT</Link></NavLink>
+  </NavItem>
+
+
+  
+  </React.Fragment>
+  )
+}
+
+{
+  
+  this.props.user.role == 'admin' && (
+    <React.Fragment>
+    <NavItem>
+    <NavLink ><Link to ="/profile" style = {this.linkStyle} >PROFILE</Link></NavLink>
+  </NavItem>
+
+  <NavItem>
+    <NavLink ><Link to ="/vehicals" style = {this.linkStyle} >VEHICALS</Link></NavLink>
+  </NavItem>
+
+  <NavItem>
+    <NavLink ><Link to ="/issue-history" style = {this.linkStyle} >SOLUTION HISTORY</Link></NavLink>
+  </NavItem>
+
+  <NavItem>
+    <NavLink ><Link to ="/home" style = {this.linkStyle} onClick = {this.handleLogout } >LOGOUT</Link></NavLink>
+  </NavItem>
+
+
+  
+  </React.Fragment>
+  )
+}
+              
+
+              </React.Fragment>
+
+
+
             ) : (
               <React.Fragment>
               <NavItem>
@@ -98,6 +191,11 @@ class App extends React.Component{
             </React.Fragment>
             )
           }
+
+
+
+
+
 
           </Nav>
         </Collapse>

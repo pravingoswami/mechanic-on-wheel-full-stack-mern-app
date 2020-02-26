@@ -88,18 +88,20 @@ const userSchema = new Schema({
     },
 
     lisenceNumber : {
-        type : String    },
+        type : String,
+        unique : true
+    },
 
     lisenceImage : {
         type : String
     },
 
-    vehical : [
-        {
-            type : mongoose.Schema.Types.ObjectId,
-            ref : 'Vehical'
-        }
-    ],
+    // vehical : [
+    //     {
+    //         type : mongoose.Schema.Types.ObjectId,
+    //         ref : 'Vehical'
+    //     }
+    // ],
 
     createdAt : {
         type : Date,
@@ -146,6 +148,7 @@ userSchema.methods.generateToken = function(ip){
     const tokenData = {
         id : user._id,
         username : user.username,
+        role : user.role,
         createdAt : Date.now()
     }
     const token = jwt.sign(tokenData, 'jwt@123')
