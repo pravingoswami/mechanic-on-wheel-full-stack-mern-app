@@ -80,7 +80,7 @@ const userSchema = new Schema({
 
     gender : {
         type : String,
-        enum : ['male', 'female']
+        enum : ['Male', 'Female']
     },
 
     avatar : {
@@ -96,12 +96,7 @@ const userSchema = new Schema({
         type : String
     },
 
-    // vehical : [
-    //     {
-    //         type : mongoose.Schema.Types.ObjectId,
-    //         ref : 'Vehical'
-    //     }
-    // ],
+
 
     createdAt : {
         type : Date,

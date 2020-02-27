@@ -4,7 +4,12 @@ const ServiceProvider = require('../models/serviceProvider')
 
 
 module.exports.register = (req, res) => {
+    console.log(req.files.avatar[0].path)
     const user = new User(pick(req.body, ['name', 'username', 'email', 'mobile', 'password', 'role', 'gender', 'avatar', 'lisenceNumber', 'lisenceImage']))
+    req.files && (user.avatar = req.files.avatar[0].path,
+        user.lisenceImage = req.files.lisenceImage[0].path
+        )
+        console.log('this is user',user)
     if(req.body.role == 'customer'){
         user.save()
             .then(user => res.json(pick(user, ['_id','name', 'user', 'email', 'mobile', 'gender', 'avatar', 'lisenceNumber', 'lisenceImage'])))
@@ -83,6 +88,9 @@ module.exports.info = (req, res) => {
 
 module.exports.edit = (req, res) => {
     const body = pick(req.body,  ['name', 'username', 'mobile', 'gender', 'avatar'])
+    req.files && (body.avatar == req.files.avatar.path,
+        body.lisenceImage = req.files.lisenceImage.path
+        )
     User.findByIdAndUpdate(req.user._id, body, {new : true, runValidators : true})
         .then(user => user ? res.json(pick(user, ['_id','name', 'user', 'email', 'mobile', 'gender', 'avatar', 'lisenceNumber', 'lisenceImage'])) : res.json({}))
         .catch(err => res.json(err))
@@ -90,7 +98,7 @@ module.exports.edit = (req, res) => {
 
 module.exports.logout = (req, res) => {
     User.findByIdAndUpdate(req.user._id, {$pull : {tokens : { token : req.token}}})
-        .then(user => user ? res.json(pick(user, ["_id", "username", "email", "mobile"])) : res.json({}))
+        .then(user => user ? res.json(pick(user, ["_id", "username", "email", "mobile", 'avatar', 'lisenceNumber'])) : res.json({}))
         .catch(err => res.json(err))
 }
 

@@ -7,6 +7,7 @@ const app = express()
 setupDB()
 
 app.use(cors())
+app.use('/upload', express.static('upload'))
 app.use(express.json())
 app.use('/', router)
 

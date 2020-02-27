@@ -5,6 +5,8 @@ import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import {Link} from 'react-router-dom'
 import { startRegisterUser } from '../../../actions/usersActions'
 
+import {connect} from 'react-redux'
+
 const customerImage  =  require('../../../images/customer.jpg')
 const serviceProviderImage  =  require('../../../images/serviceprovider.png')
 
@@ -51,17 +53,47 @@ class RegisterUser extends React.Component{
         })
     }
 
+    handleGender = (e) => {
+      this.setState({gender : e.target.value})
+    }
+
+    handleAvatar = (e) => {
+      console.log('avatara', e.target.files[0])
+      this.setState({avatar : e.target.files[0]})
+    }
+
+    handleLisence = (e) => {
+      console.log('lisemce', e.target.files[0])
+      this.setState({lisenceImage : e.target.files[0]})
+    }
+
     handleSubmit = (e) => {
         e.preventDefault()
-
+        console.log(this.state)
         const formData = {
             email : this.state.email,
             password : this.state.password,
             username : this.state.username,
-            mobile : this.state.mobile
+            mobile : this.state.mobile,
+            name : this.state.name,
+            role : this.state.role,
+            gender : this.state.gender,
+            lisenceNumber : this.state.lisenceNumber,
+            serviceType : this.state.serviceType,
+            shopName : this.state.shopName
         }
+
+        const data = new FormData()
+
+        for(let key in formData){
+          data.append(key, formData[key])
+        }
+        this.state.lisenceImage && data.append('lisenceImage', this.state.lisenceImage)
+
+        this.state.avatar && data.append('avatar', this.state.avatar)
+        
         const redirect = () => this.props.history.push('/login')
-        this.props.dispatch(startRegisterUser(formData, redirect))
+        this.props.dispatch(startRegisterUser(data, redirect))
         console.log(formData)
         
     }
@@ -165,7 +197,7 @@ class RegisterUser extends React.Component{
                     label="Your Name"
                     value = {this.state.name}
                     type="text"
-                    name = "email"
+                    name = "name"
                     onChange = {this.handleForm}
                     success="right"
                   >
@@ -249,12 +281,12 @@ class RegisterUser extends React.Component{
 
         <br></br>
 
-                <Label for="avatar" onChange = {this.handleAvatar} >Profile Picture</Label>
-        <Input type="file" name="avatar" id="avatar" />
+                <Label for="avatar" >Profile Picture</Label>
+        <Input type="file" name="avatar" id="avatar"  enctype="multipart/form-data" onChange = {this.handleAvatar}  />
         <br></br>
 
-        <Label for="lisenceImage" onChange = {this.handleProfile} >Lisence Image</Label>
-        <Input  type="file" name="lisenceImage" id="lisenceImage" />
+        <Label for="lisenceImage" >Lisence Image</Label>
+        <Input  type="file" name="lisenceImage" id="lisenceImage"  enctype="multipart/form-data" onChange = {this.handleLisence}   />
 
 
        
@@ -304,4 +336,4 @@ class RegisterUser extends React.Component{
     }
 }
 
-export default RegisterUser
+export default connect()(RegisterUser)
