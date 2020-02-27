@@ -10,7 +10,7 @@ class NewVehical extends React.Component{
         this.state = {
             vehicalNumber : '',
             vehicaltype : '',
-            vehical : ['2 Wheeler', '4 Wheeler', '3 Wheeler']
+            vehical : ['Bike', 'Car', 'Auto']
         }
     }
 

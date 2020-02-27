@@ -24,6 +24,9 @@ import { startLogoutUser } from './actions/usersActions';
 import VahicalList from './components/customer/vehical/VahicalList';
 import NewVehical from './components/customer/vehical/NewVehical';
 import ShowVehical from './components/customer/vehical/ShowVehical';
+import ProfileShow from './components/customer/profile/ProfileShow';
+import ProfileEdit from './components/customer/profile/ProfileEdit';
+import RegisterUser from './components/customer/register/RegisterUser';
 
 
 class App extends React.Component{
@@ -203,12 +206,15 @@ class App extends React.Component{
 
 
       <Route path = "/home" component = {HomePage} />
-      <Route path = "/register" component = {RegisterPage} />
+      <Route path = "/register" component = {RegisterUser} />
       <Route path = "/login" component = {LoginPage} />
 
       <Route path = "/vehicals" component = {VahicalList} exact = {true} />
       <Route path = "/vehicals/add-vehicals" component = {NewVehical} exact = {true}/>
       <Route path = "/vehicals/show/:vehical" component = {ShowVehical} exact = {true}/>
+
+      <Route path = "/profile" component = {ProfileShow} exact = {true} />
+      <Route path = "/profile/edit" component = {ProfileEdit} exact = {true} />
     
 
     </BrowserRouter>
