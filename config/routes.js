@@ -35,7 +35,7 @@ const upload = multer({storage : storage, fileFilter : fileFilter})
 router.post('/users/register',upload.fields([{name : 'avatar'}, {name : 'lisenceImage'}]), usersControllers.register)
 router.post('/users/login', usersControllers.login)
 router.get('/users/account',authenticateUser ,usersControllers.info)
-router.post('/users/edit',authenticateUser , upload.fields([{name : 'avatar'}, {name : 'lisenceImage'}]) , usersControllers.edit)
+router.put('/users/edit',authenticateUser , upload.single('avatar') , usersControllers.edit)
 router.delete('/users/logout',authenticateUser ,usersControllers.logout)
 
 const vehicalStorage = multer.diskStorage({

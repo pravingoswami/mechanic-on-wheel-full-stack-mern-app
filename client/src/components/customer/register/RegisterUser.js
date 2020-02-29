@@ -28,8 +28,8 @@ height : "95vh"
 
 class RegisterUser extends React.Component{
 
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state = {
             email : '',
             password : '',
@@ -113,7 +113,7 @@ class RegisterUser extends React.Component{
             <div>
 
 
-                 <div  style = {imageStyle}>
+                 <div  style = {imageStyle}>{console.log(this.props.user)}
                 <MDBContainer >
                     <br></br>
                     <br></br>
@@ -336,4 +336,10 @@ class RegisterUser extends React.Component{
     }
 }
 
-export default connect()(RegisterUser)
+const mapStateToProps = (state) => {
+  return {
+    user : state.user
+  }
+}
+
+export default connect(mapStateToProps)(RegisterUser)

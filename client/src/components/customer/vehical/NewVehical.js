@@ -34,9 +34,13 @@ class NewVehical extends React.Component{
             vehicalNumber : this.state.vehicalNumber,
             vehicalType : this.state.vehicaltype
         }
+        const data = new FormData
+        for(let key in formData){
+            data.append(key, formData[key])
+        }
         const redirect = () => this.props.history.push('/vehicals')
         console.log(formData)
-        this.props.dispatch(startAddVehical(formData, redirect))
+        this.props.dispatch(startAddVehical(data, redirect))
 
     }
 

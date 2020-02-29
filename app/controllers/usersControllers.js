@@ -56,6 +56,7 @@ module.exports.login = (req, res) => {
 
                             if(serviceProvider){
                                 user['serviceType'] = serviceProvider.serviceType
+                                serviceProvider.shopName && (user['shopName'] = serviceProvider.shopName)
                                 res.json({user, token})
                             } else {
                                 res.json({})
@@ -76,7 +77,8 @@ module.exports.info = (req, res) => {
         .then(serviceProvider => {
             if(serviceProvider){
                 req.user.serviceType = serviceProvider.serviceType
-                res.json(pick(req.user, ['_id','name', "username", "email", 'role', 'mobile', 'gender', 'avatar', 'serviceType', 'lisenceNumber', 'lisenceImage']))
+                serviceProvider.shopName && (req.user['shopName'] = serviceProvider.shopName)
+                res.json(pick(req.user, ['_id','name', "username", "email", 'role', 'mobile', 'gender', 'avatar', 'serviceType', 'lisenceNumber', 'lisenceImage', 'shopName']))
             } else {
                 res.json({})
             }
@@ -88,9 +90,10 @@ module.exports.info = (req, res) => {
 
 module.exports.edit = (req, res) => {
     const body = pick(req.body,  ['name', 'username', 'mobile', 'gender', 'avatar'])
-    req.files && (body.avatar == req.files.avatar.path,
-        body.lisenceImage = req.files.lisenceImage.path
-        )
+    console.log(req.file)
+    req.file && (body['avatar'] = req.file.path )
+    console.log(body)
+
     User.findByIdAndUpdate(req.user._id, body, {new : true, runValidators : true})
         .then(user => user ? res.json(pick(user, ['_id','name', 'user', 'email', 'mobile', 'gender', 'avatar', 'lisenceNumber', 'lisenceImage'])) : res.json({}))
         .catch(err => res.json(err))

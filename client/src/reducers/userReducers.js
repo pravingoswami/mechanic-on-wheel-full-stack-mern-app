@@ -11,6 +11,10 @@ const userReducers = (state = userInitialState, action) => {
             return {}
         }
 
+        case ' EDIT_USER' : {
+            return {...action.payload}
+        }
+
         default : {
             return state
         }

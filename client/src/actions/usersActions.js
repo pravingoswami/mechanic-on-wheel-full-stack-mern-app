@@ -12,6 +12,7 @@ export const startLoginUser = (formData, redirect) => {
     return (dispatch) => {
         axios.post('/users/login', formData)
             .then(response => {
+                console.log(response.data)
                 if(response.data.errors){
                     Swal.fire(
                         'Alert!',
@@ -64,6 +65,13 @@ export const startLogoutUser = () => {
     }
 }
 
+export const editUser = (user) => {
+    return {
+        type : 'EDIT_USER',
+        payload : user
+    }
+}
+
 export const startRegisterUser = (formData, redirect) => {
     return (dispatch) => {
         axios.post('/users/register', formData)
@@ -74,7 +82,7 @@ export const startRegisterUser = (formData, redirect) => {
                         response.data.errmsg,
                         'error'
                       )
-                } else if(response.data.errors){
+                } else if(response.data.message){
                     Swal.fire(
                         'Alert!',
                         response.data.message,
@@ -89,5 +97,40 @@ export const startRegisterUser = (formData, redirect) => {
                     redirect()
                 }
             })
+    }
+}
+
+export const startEditUser = (formData, redirect) => {
+    return(dispatch) => {
+        axios.put('/users/edit', formData , {
+            headers : {
+                'x-auth' : localStorage.getItem('x-auth')
+            }
+        })
+        .then(response => {
+            console.log(response.data)
+            if(response.data.errmsg){
+                Swal.fire(
+                    'Alert!',
+                    response.data.errmsg,
+                    'error'
+                  )
+            } else if(response.data.message){
+                Swal.fire(
+                    'Alert!',
+                    response.data.message,
+                    'error'
+                  )
+            } else {
+                dispatch(editUser(response.data))
+                Swal.fire(
+                    'Updated!!',
+                    'You Successfully Updated Data.',
+                    'success'
+                  )  
+                  console.log(response.data)
+                redirect()
+            }
+        })
     }
 }
